@@ -1,3 +1,7 @@
+## Preview
+
+![Dashboard](screenshots/dashboard.png)
+
 # Operations Monitor Dashboard
 
 A real-time system and network monitoring dashboard built with Flask and Python.
