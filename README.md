@@ -29,20 +29,23 @@ ops-monitor-dashboard/
 ├── README.md
 │
 ├── monitors/
-│ ├── system_monitor.py
-│ └── network_monitor.py
+│   ├── system_monitor.py
+│   └── network_monitor.py
 │
 ├── utils/
-│ └── logger.py
+│   └── logger.py
 │
 ├── templates/
-│ └── dashboard.html
+│   └── dashboard.html
 │
 ├── static/
-│ └── style.css
+│   └── style.css
 │
-└── logs/
-└── app.log
+├── logs/
+│   └── app.log
+│
+└── screenshots/
+    └── dashboard.png
 
 ## How to Run
 
@@ -51,22 +54,26 @@ ops-monitor-dashboard/
 ```bash
 git clone https://github.com/SeanCah/ops-monitor-dashboard.git
 cd ops-monitor-dashboard
+```
 
 2. Create a virtual enviroment
 
 ```bash
 python -m venv venv
 venv\Scripts\activate
+```
 
 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
+```
 
 4. Run the application
 
 ```bash
 python app.py
+```
 
 5. Open in browser
 
