@@ -21,6 +21,7 @@ A real-time system and network monitoring dashboard built with Flask and Python.
 
 ## Project Structure
 
+```bash
 ops-monitor-dashboard/
 │
 ├── app.py
@@ -46,6 +47,7 @@ ops-monitor-dashboard/
 │
 └── screenshots/
     └── dashboard.png
+```
 
 ## How to Run
 
