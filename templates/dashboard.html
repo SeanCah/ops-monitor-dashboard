@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operations Monitor Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Operations Monitor Dashboard</h1>
+    <p class="subtitle">
+        Real-time system and network monitoring dashboard built with Flask and Python
+    </p>
+
+    <div class="grid">
+
+        <div class="card">
+            <h2>System Statistics</h2>
+        
+            <div class="stat">
+                <div>CPU Usage</div>
+                <div class="value">{{ system_stats.cpu | round(1) }}%</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill {% if system_stats.cpu < 50 %}green{% elif system_stats.cpu < 80 %}yellow{% else %}red{% endif %}" 
+                     style="width: {{ system_stats.cpu }}%;">
+                </div>
+            </div>
+            <div class="severity">
+                {% if system_stats.cpu < 50 %}
+                    Healthy
+                {% elif system_stats.cpu < 80 %}
+                    Moderate Load
+                {% else %}
+                    High Load
+                {% endif %}
+            </div>
+        
+            <div class="stat">
+                <div>Memory Usage</div>
+                <div class="value">{{ system_stats.memory.percent | round(1) }}%</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill {% if system_stats.memory.percent < 50 %}green{% elif system_stats.memory.percent < 80 %}yellow{% else %}red{% endif %}" 
+                     style="width: {{ system_stats.memory.percent }}%;">
+                </div>
+            </div>
+            <div class="severity">
+                {% if system_stats.memory.percent < 50 %}
+                    Healthy
+                {% elif system_stats.memory.percent < 80 %}
+                    Moderate Usage
+                {% else %}
+                    High Usage
+                {% endif %}
+            </div>
+        
+            <div class="stat">
+                <div>Disk Usage</div>
+                <div class="value">{{ system_stats.disk.percent | round(1) }}%</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill {% if system_stats.disk.percent < 50 %}green{% elif system_stats.disk.percent < 80 %}yellow{% else %}red{% endif %}" 
+                     style="width: {{ system_stats.disk.percent }}%;">
+                </div>
+            </div>
+            <div class="severity severity-last">
+                {% if system_stats.disk.percent < 50 %}
+                    Healthy
+                {% elif system_stats.disk.percent < 80 %}
+                    Moderate Usage
+                {% else %}
+                    Critical Usage
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Network Status</h2>
+
+            {% for host in network_stats %}
+            <div class="network-item">
+                <div class="host">{{ host.host }}</div>
+
+                <div class="status">
+                    <span class="badge {{ 'good' if host.reachable else 'bad' }}">
+                        {{ 'Reachable' if host.reachable else 'Unreachable' }}
+                    </span>
+                    <span class="badge {{ 'good' if host.port_80_open else 'bad' }}">
+                        {{ 'Port 80 Open' if host.port_80_open else 'Port 80 Closed' }}
+                    </span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
